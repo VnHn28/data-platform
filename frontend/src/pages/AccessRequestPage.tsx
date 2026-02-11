@@ -14,7 +14,10 @@ export function AccessRequestsPage() {
   useEffect(() => {
     authFetch("/access-requests/")
       .then(res => res.json())
-      .then(setRequests);
+      .then((data: any) => {
+        setRequests(Array.isArray(data) ? data : data.results || []);
+      })
+      
   }, []);
 
   const approve = async (id: number) => {

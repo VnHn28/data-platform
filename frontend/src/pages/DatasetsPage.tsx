@@ -17,7 +17,9 @@ export function DatasetsPage() {
   useEffect(() => {
     authFetch("/datasets/")
       .then(res => res.json())
-      .then(setDatasets)
+      .then((data: any) => {
+        setDatasets(Array.isArray(data) ? data : data.results || []);
+      })
       .finally(() => setLoading(false));
   }, []);
 
