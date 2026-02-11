@@ -34,8 +34,8 @@ function App() {
 
   if (!token) {
     return (
-      <div className="App" style={styles.loginContainer}>
-        <div style={styles.loginBox}>
+      <div className="App login-container">
+        <div className="login-box">
           <h1 style={{ marginBottom: '2rem', color: '#333' }}>Data Platform</h1>
           <LoginPage onLogin={handleLogin} />
         </div>
@@ -44,98 +44,31 @@ function App() {
   }
 
   return (
-    <div className="App" style={styles.appContainer}>
-      <nav style={styles.nav}>
-        <div style={styles.brand}>Data Platform</div>
-        <div style={styles.navLinks}>
+    <div className="App app-container">
+      <nav className="nav">
+        <div className="brand">Data Platform</div>
+        <div className="nav-links">
           <button
-            style={page === 'datasets' ? { ...styles.navButton, ...styles.activeNavButton } : styles.navButton}
+            className={`nav-button ${page === 'datasets' ? 'active' : ''}`}
             onClick={() => setPage('datasets')}
           >
             Datasets
           </button>
           <button
-            style={page === 'requests' ? { ...styles.navButton, ...styles.activeNavButton } : styles.navButton}
+            className={`nav-button ${page === 'requests' ? 'active' : ''}`}
             onClick={() => setPage('requests')}
           >
             Access Requests
           </button>
         </div>
-        <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
+        <button onClick={handleLogout} className="logout-button">Logout</button>
       </nav>
-      <main style={styles.main}>
+      <main className="main-content">
         {page === 'datasets' && <DatasetsPage />}
         {page === 'requests' && <AccessRequestsPage />}
       </main>
     </div>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  loginContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    backgroundColor: '#f5f7fa',
-  },
-  loginBox: {
-    padding: '3rem',
-    backgroundColor: 'white',
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-    textAlign: 'center',
-  },
-  appContainer: {
-    minHeight: '100vh',
-    backgroundColor: '#f9fafb',
-  },
-  nav: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '1rem 2rem',
-    backgroundColor: 'white',
-    borderBottom: '1px solid #e5e7eb',
-    boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-  },
-  brand: {
-    fontSize: '1.25rem',
-    fontWeight: 'bold',
-    marginRight: '3rem',
-    color: '#111827',
-  },
-  navLinks: {
-    display: 'flex',
-    gap: '1rem',
-  },
-  navButton: {
-    background: 'none',
-    border: 'none',
-    padding: '0.5rem 1rem',
-    cursor: 'pointer',
-    fontSize: '1rem',
-    color: '#6b7280',
-    borderRadius: '4px',
-  },
-  activeNavButton: {
-    backgroundColor: '#eff6ff',
-    color: '#2563eb',
-    fontWeight: 500,
-  },
-  logoutButton: {
-    marginLeft: 'auto',
-    padding: '0.5rem 1rem',
-    backgroundColor: '#ef4444',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-  main: {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '2rem',
-  },
-};
 
 export default App;
